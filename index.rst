@@ -14,6 +14,7 @@ Welcome to TZmediator_docs's documentation!
 
 Indices and tables
 ==================
+introduction/index
 
 * :ref:`genindex`
 * :ref:`modindex`
