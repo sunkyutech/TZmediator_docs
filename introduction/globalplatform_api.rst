@@ -10,10 +10,12 @@ TEE Client API
 
 TEE Client APIの使用例
 ^^^^^^^^^^^^^^^^^^^^^^^
-::
+
+.. code-block:: c
+
     TEEC_Result TEEC_InitializeContext(
-    const char* name,
-    TEEC_Context* context)
+        const char* name,
+        TEEC_Context* context)
 
     void TEEC_FinalizeContext(
         TEEC_Context* context)
