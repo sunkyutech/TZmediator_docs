@@ -3,22 +3,25 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to TZmediator_docs's documentation!
-===========================================
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
-
-
-
-Indices and tables
+TZmediator Documentation
 ==================
 
+TZmediatorの引き継ぎ資料です．
+
 .. toctree::
    :maxdepth: 2
 
-   introduction/index
+   getting_started/index
+
+.. toctree::
+   :maxdepth: 2
+
+   architecture/index
+
+.. toctree::
+   :maxdepth: 2
+
+   faq/faq
 
 * :ref:`genindex`
 * :ref:`modindex`

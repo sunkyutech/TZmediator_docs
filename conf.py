@@ -6,9 +6,9 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'TZmediator_docs'
-copyright = '2024, taiyo sato'
-author = 'taiyo sato'
+project = 'TZmediator'
+copyright = '2026, Taiyo Sato'
+author = 'Taiyo Sato'
 release = '1.0.0'
 
 # -- General configuration ---------------------------------------------------
@@ -25,4 +25,9 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
 html_theme = 'sphinx_rtd_theme'
+try:
+    import sphinx_rtd_theme  # noqa: F401
+except ModuleNotFoundError:
+    # Esbonio の bundled Sphinx などでテーマが無い場合
+    html_theme = "alabaster"
 html_static_path = ['_static']
