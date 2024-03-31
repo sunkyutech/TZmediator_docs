@@ -14,7 +14,11 @@ Welcome to TZmediator_docs's documentation!
 
 Indices and tables
 ==================
-introduction/index
+
+.. toctree::
+   :maxdepth: 2
+
+   introduction/index
 
 * :ref:`genindex`
 * :ref:`modindex`
