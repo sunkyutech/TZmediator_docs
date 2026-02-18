@@ -4,29 +4,20 @@
    contain the root `toctree` directive.
 
 TZmediator Documentation
-<<<<<<< HEAD
-==================
-=======
 ========================
 
 TZmediatorのドキュメント (引き継ぎ資料)です．
->>>>>>> 7ddbd07 (ドキュメントの追加と更新)
 
-TZmediatorの引き継ぎ資料です．
 
 .. toctree::
    :maxdepth: 2
 
-<<<<<<< HEAD
-   getting_started/index
-=======
    about/index
 
 .. toctree::
    :maxdepth: 2
 
    setup/index
->>>>>>> 7ddbd07 (ドキュメントの追加と更新)
 
 .. toctree::
    :maxdepth: 2
@@ -36,8 +27,6 @@ TZmediatorの引き継ぎ資料です．
 .. toctree::
    :maxdepth: 2
 
-<<<<<<< HEAD
-=======
    guides/index
 
 .. toctree::
@@ -53,7 +42,6 @@ TZmediatorの引き継ぎ資料です．
 .. toctree::
    :maxdepth: 2
 
->>>>>>> 7ddbd07 (ドキュメントの追加と更新)
    faq/faq
 
 * :ref:`genindex`
