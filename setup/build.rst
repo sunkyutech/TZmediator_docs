@@ -1,21 +1,111 @@
-#########
+##############
 ビルド手順
-#########
+##############
 
-...
+TZmediatorのビルドは，以下の手順で行います．
 
 step 1 - ソースコードの取得
-************************
+*****************************
 
-step 2 - ソースコードの取得
-************************
+まず，TZmediatorおよび関連リポジトリを取得します．
+
+.. code-block:: bash
+
+    git clone <TZmediatorのリポジトリURL>
+    cd <TZmediatorディレクトリ>
+
+必要に応じて，サブモジュールを取得します．
+
+.. code-block:: bash
+
+    git submodule update --init --recursive
+
+
+
+step 2 - ビルド環境の構築
+******************************
+
+TZmediatorのビルドには，以下のツールチェーンおよび依存パッケージが必要です．
+
+- クロスコンパイラ（aarch64-linux-gnu-gcc など）
+- OP-TEEビルド環境
+- make, cmake
+- Python（ビルドスクリプト用）
+- その他必要なライブラリ（<必要に応じて追記>）
+
+例：
+
+.. code-block:: bash
+
+    sudo apt update
+    sudo apt install build-essential git cmake python3
+
+クロスコンパイラのパスを環境変数に設定します．
+
+.. code-block:: bash
+
+    export CROSS_COMPILE=<ツールチェーンのパス>/aarch64-linux-gnu-
+
+また，OP-TEE関連の環境変数を設定します．
+
+.. code-block:: bash
+
+    export OPTEE_OS_DIR=<optee_osのパス>
+    export OPTEE_CLIENT_EXPORT=<optee_clientのパス>
+    export TA_DEV_KIT_DIR=<TA dev kitのパス>
+
+step 3 - OP-TEE OSのビルド
+*********************************
+
+OP-TEE OSをビルドします．
+
+.. code-block:: bash
+
+    cd <opteeビルドディレクトリ>
+    make -j$(nproc)
+
+ビルドが成功すると，以下のファイルが生成されます．
+
+- tee.bin
+- u-boot.bin（環境による）
+- rootfs など
+
+.. attention::
+
+    クロスコンパイル環境でビルドする場合，対象アーキテクチャに注意してください．
+
+
+step 4 - ライブラリのビルド
+*********************************
+
+OP-TEE Clientライブラリをビルドします．
+
+.. code-block:: bash
+
+    make -C imx-optee-client \
+        DESTDIR="${PWD}/out" \
+        CROSS_COMPILE="aarch64-linux-gnu-" \
+        TA_DEV_KIT_DIR="${PWD}/imx-boot-[VERSION]/imx-optee-os/out/export-ta_arm64"
+
+TZmライブラリをビルドします．
+
+.. code-block:: bash
+
+    ./build_lib.sh
+
+
+step 5 - アプリケーションのビルド
+*************************************
+
+CA側で動作するアプリケーションをビルドします．
+
+``teecライブラリ (libteec.a)`` と　``TZm-CAライブラリ (libtzm-ca.a)`` をリンクする必要があります．
+
+TA側で動作するアプリケーションをビルドします．
+
+``teecライブラリ (libteec.a)`` と　``TZm-TAライブラリ (libtzm-ta.a)`` をリンクする必要があります．
 
 .. hint::
 
-    By referencing an existing and locally saved repo forest you can save lots
-    of time. We are talking about doing repo sync in 30 seconds instead of 15-30
-    minutes (see the :ref:`tips_and_tricks` section for more details).
-
-.. note::
-    If you've built using our manifest you should not need to modprobe any
-    OP-TEE/TEE kernel driver since it's built into the kernel in all our setups.
+    TAのビルドには，``ta-cc`` を使用することができます．
+    ta-ccの詳細については，:ref:`ta-cc_usage` を参照してください．

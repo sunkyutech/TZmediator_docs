@@ -1,2 +1,4 @@
-Freaquently Asked Questions
-###############
+FAQ
+###
+
+ここでは，TZmediatorに関するよくある質問とその回答をまとめています．

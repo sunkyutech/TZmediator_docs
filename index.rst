@@ -6,7 +6,7 @@
 TZmediator Documentation
 ========================
 
-TZmediatorのドキュメント (引き継ぎ資料)です．
+TZmediatorのドキュメント (引き継ぎ資料) です．
 
 
 .. toctree::
@@ -44,6 +44,11 @@ TZmediatorのドキュメント (引き継ぎ資料)です．
 
    faq/faq
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+.. toctree::
+   :maxdepth: 2
+
+   tips/index
+
+.. * :ref:`genindex`
+.. * :ref:`modindex`
+.. * :ref:`search`
