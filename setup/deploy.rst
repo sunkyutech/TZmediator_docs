@@ -2,24 +2,36 @@
 デプロイ
 #############
 
-ビルドしたTAは， ``/usr/lib/optee_armtz/`` に配置する必要があります．
+(TZmediatorの使用有無に関わらず) ビルドしたTAは， ``/usr/lib/optee_armtz/`` に配置する必要があります．
 
 QEMUの場合
-*************
+**************************
 
 ``make run`` コマンドを実行すると，ビルドしたTAがQEMU上の ``/usr/lib/optee_armtz/`` に自動的に配置されます．
 
+また，ビルドしたTAをQEMU上に手動で配置することもできます．
+
+
 Armadillo-X2の場合
-*********************
+**************************
 
-自分でTAを適切な場所に配置する必要があります．
+TAを適切な場所に配置する必要があります．
 
-Armadillo-X2のドキュメントでは，tarballで固めて転送し，ターゲット上のコンテナで展開する方法が紹介されています．
+Armadillo-X2の公式ドキュメントでは，tarballで固めて転送し，ターゲット上のコンテナで展開する方法が紹介されています．
+
+以下のコマンドでコンテナを起動します．
 
 .. code-block:: bash
 
     [armadillo ~]# podman run -it --name=dev_optee --device=/dev/tee0 \
         --device=/dev/teepriv0 -v "$(pwd)":/mnt docker.io/debian /bin/bash
+
+.. note::
+
+    ``--device=/dev/tee0`` と ``--device=/dev/teepriv0`` は，TAがTEEデバイスにアクセスできるようにするためのオプションです．
+    これらのオプションを使用することで，コンテナ内からTAがTEEデバイスにアクセスできるようになります．
+
+コンテナ内で，tarballを展開してTAを配置します．
 
 .. code-block:: bash
 

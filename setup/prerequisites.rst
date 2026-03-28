@@ -5,7 +5,11 @@
 TZmeditorをビルドして実行するためには，OP-TEEをビルドするための環境が必要です．
 OP-TEEのビルド方法についての詳細は，`OP-TEEドキュメントのビルドと実行 <https://optee.readthedocs.io/en/latest/building/index.html>`_ を参照してください．
 
-Ubuntu 22.04
+ここでは，Ubuntuベースのディトリビューションを使用しているユーザを対象にします．
+
+以下に，参考として，OP-TEEのビルドに必要なパッケージを含めたDockerfileを示します．
+
+**Ubuntu 22.04**
 
 .. code-block :: text
 
