@@ -17,3 +17,19 @@ tee-supplicantが起動していない場合は，以下のコマンドで起動
 .. code-block:: bash
 
     [container ~]# tee-supplicant -d
+
+コマンドを実行します．
+
+.. code-block:: bash
+
+    [container ~]# test
+
+
+スクリプトを用いることで，コンテナの外から実行することもできます．
+
+.. code-block:: bash
+
+    ./run.sh
+
+実験データを取得する場合には，ソースコードで適切な出力処理を行い， ``tee`` コマンドを用いてパイプラインから出力を保存することができます．
+保存したデータの分析方法を　:ref:`jupyter` に記載しています．

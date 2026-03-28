@@ -19,6 +19,12 @@ extensions = []
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
+language = "ja"
+
+# PDF/LaTeX 用
+latex_documents = [
+    ('index', 'tzmediator.tex', 'TZmediator Documentation', 'Taiyo Sato', 'manual'),
+]
 
 
 # -- Options for HTML output -------------------------------------------------
