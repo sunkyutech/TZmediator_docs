@@ -32,11 +32,6 @@ TZmediatorのドキュメント (引き継ぎ資料) です．
 .. toctree::
    :maxdepth: 2
 
-   api/index
-
-.. toctree::
-   :maxdepth: 2
-
    debugging/index
 
 .. toctree::
