@@ -4,11 +4,8 @@ APIの追加方法
 
 TZmediatorのAPIを追加するには，以下の手順で行います．
 
-TZmライブラリへの追加
-**************************
-
 TZm-TAライブラリへの追加
-==========================
+***********************************
 
 **step1: ヘッダファイルの作成**
 
@@ -23,7 +20,7 @@ TZm-TAライブラリへの追加
 ``/libtzm-ta/src/`` ディレクトリに，追加するAPIのソースファイルを作成します．
 
 .. hint::
-    ソース  ファイルの命名規則は ``tz_`` + 従来のヘッダファイル名 + ``.c`` です．
+    ソースファイルの命名規則は ``tz_`` + 従来のヘッダファイル名 + ``.c`` です．
     例えば，従来のヘッダファイル名が ``foo`` の場合，ソースファイルは ``tz_foo.c`` となります．
 
 **step3: include_shimへのヘッダファイルの追加**
@@ -38,12 +35,29 @@ TZm-TAライブラリへの追加
 
 **step4: ライブラリのビルド**
 
-と同様に，再度ライブラリをビルドします．
+:ref:`build_lib` と同様に，再度ライブラリをビルドします．
+
+.. code-block:: bash
+
+    cd linux-trustzone
+    ./build_lib.sh
+
 
 TZm-CAライブラリへの追加
-===========================
+***********************************
 
+**step1: ヘッダファイルの作成**
 
+``/libtzm-ca/include/`` ディレクトリに，追加するAPIのヘッダファイルを作成します．
+この時，関数名は従来のAPIとは異なる名前にしてください．
+
+**step2: ソースファイルの作成**
+
+``/libtzm-ca/src/`` ディレクトリに，追加するAPIのソースファイルを作成します．
+
+**step4: ライブラリのビルド**
+
+:ref:`build_lib` と同様に，再度ライブラリをビルドします．
 
 
 WASI・WAMRへの追加
@@ -84,7 +98,7 @@ WASI・WAMRへの追加
 
 .. code-block:: bash
 
-    $ cd /wasi-sdk/src/wasi-libc
+    $ cd wasi-sdk/src/wasi-libc
     $ make EXTRA_CFLAGS="-D__use_tzmlib -D_WASI_EMULATED_SIGNAL -D_WASI_EMULATED_PROCESS_CLOCKS"
 
 ``/wasi-sdk/src/wasi-libc/sysroot/include/`` ディレクトリに，追加したAPIのヘッダファイルが配置され， ``/wasi-sdk/src/wasi-libc/sysroot/share/wasm32-wasi/undefined-symbols.txt`` に未定義のシンボルが記録されていることを確認します．
@@ -113,5 +127,5 @@ WASI・WAMRへの追加
 
 .. code-block:: bash
 
-
+    $ ./build.sh
 
