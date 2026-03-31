@@ -2,12 +2,27 @@
 Sphinxを用いたドキュメントの作成
 ######################################
 
-解析コードとその解説を整理した後は，Sphinxを利用してプロジェクト全体のドキュメントを構築します．
-単なるメモの集合体ではなく，検索や相互参照が可能な「技術ドキュメント」へと変換するプロセスです．
+Sphinxを利用してプロジェクト全体のドキュメントを作成することができます．
 
-1. Sphinxの導入と初期設定
+環境構築と初期設定
+===============================
 
-SphinxはPython標準のドキュメント生成ツールであり，`sphinx-quickstart` コマンドによって基本的なディレクトリ構造を即座に生成できます．
+.. hint::
+
+   Sphinxのインストール方法からrst形式の書き方まで， `Sphinxの使い方 <https://zenn.dev/y_mrok/books/sphinx-no-tsukaikata>`_ の記事が非常に参考になります．
+   こちらも併せてご覧ください．
+
+ここでは，簡単にSphinxの使い方を説明します．
+
+まずは，Pythonがインストールされていることを確認してください．
+
+.. code-block:: bash
+
+   $ python --version
+   Python 3.10.4
+
+
+SphinxはPython標準のドキュメント生成ツールであり， ``sphinx-quickstart`` コマンドによって基本的なディレクトリ構造を即座に生成できます．
 
 .. code-block:: bash
 
@@ -17,56 +32,62 @@ SphinxはPython標準のドキュメント生成ツールであり，`sphinx-qui
    # プロジェクトの初期化（対話形式でプロジェクト名などを入力）
    sphinx-quickstart
 
-この操作により，設定ファイル（ `conf.py` ）とインデックスファイル（ `index.rst` ）が作成されます．
-ソースファイル（rst）とビルド成果物を分離して管理することが，クリーンなドキュメント運用の第一歩です．
+この操作により，設定ファイル (``conf.py``) とインデックスファイル (``index.rst``) が作成されます．
 
-1. Jupyter Notebookとの連携（nbsphinx）
+ドキュメントの編集・プレビューは，VSCodeのSphinx拡張機能が便利です．
+(`Extension Pack for reStructuredText <https://marketplace.visualstudio.com/items?itemName=lextudio.restructuredtext-pack>`_)
 
-解析結果をそのままドキュメントに組み込むには，拡張機能である `nbsphinx` が非常に有用です．
-これにより，作成した `.ipynb` ファイルを書き換えることなく，rstドキュメントの一部として直接レンダリングできます．
+.. note::
 
-.. code-block:: python
+   ライブプレビューを利用するには，パスを正しく設定する必要があります．
 
-   # conf.py への設定追加例
-   extensions = [
-       'nbsphinx',
-       'sphinx.ext.mathjax', # 数式の表示用
-       'sphinx_rtd_theme',   # モダンなテーマの適用
-   ]
+   .. code-block:: bash
 
-この連携により，コードの実行結果や生成されたグラフが，ドキュメント内に最新の状態で自動的に反映されます．
+      {
+         "esbonio.sphinx.confDir": "{workspaceFolder}", // conf.pyが置かれているディレクトリを指定
+         "esbonio.server.enabled": true, // デフォルト true になっているはず
+         "esbonio.sphinx.buildDir": "{workspaceFolder}/_build", // ビルドで生成されるHTMLファイルなどの出力先
+         "restructuredtext.linter.doc8.extraArgs": ["--max-line-length", 200] // linterの設定（任意）
+      }
+   
+   また，reStructureText用の言語サーバ ``esbonio`` をインストールする必要があります．
 
-1. 構造的なドキュメント構成（toctree）
+   .. code-block:: bash
 
-Sphinxの最大の特徴は， `toctree` （Table of Contents Tree）による強力な構造化機能にあります．
-解析の背景，個別の実験結果，そしてまとめの考察を論理的な階層構造で管理します．
-
-.. code-block:: rst
-
-   .. toctree::
-      :maxdepth: 2
-      :caption: 解析コンテンツ:
-
-      intro.rst
-      analysis/experiment_01.ipynb
-      analysis/experiment_02.ipynb
-      summary.rst
+      pip install esbonio
 
 
+ビルドと共有
+============================
 
-1. ビルドと共有
-
-ドキュメントの生成は， `make` コマンド一つで完結します．
+ドキュメントの生成は， ``make`` コマンドを実行します．
 
 .. code-block:: bash
 
    # HTML形式でドキュメントをビルド
    make html
 
-生成された `build/html/index.html` をブラウザで開くことで，ローカル環境で完成形を確認できます．
-また，CI/CDツールと連携させることで，GitHub Pagesなどに最新の解析ドキュメントを自動公開するパイプラインを構築することも可能です．
+生成された ``_build/html/index.html`` をブラウザで開くことで，ローカル環境で完成形を確認できます．
 
-まとめ
+.. hint::
 
-Sphinxを導入することで，Jupyter Notebook単体では難しかった「ドキュメントの階層化」と「バージョン管理」が容易になります．
-解析コードを「書いて終わり」にせず，継続的にメンテナンス可能な知見のベースキャンプとして育てていくことが，エンジニアリングにおけるドキュメンテーションの本質です．
+   公式ドキュメントなどでよく見るテーマは， ``sphinx_rtd_theme`` です．
+   以下のコマンドでインストールできます．
+
+   .. code-block:: bash
+
+      pip install sphinx_rtd_theme
+   
+   ``conf.py`` を開いて， ``html_theme`` を修正します．
+
+   .. code-block:: python
+
+      html_theme = "sphinx_rtd_theme"
+
+   再度， ``make html`` を実行してビルドし直すと，テーマが変更されていることが確認できます．
+
+Sphinxで作成したドキュメントをGitHubにアップロードすると `GitHub Pages <https://docs.github.com/ja/pages/getting-started-with-github-pages/what-is-github-pages>`_ や `Read the Docs <https://about.readthedocs.com/?ref=app.readthedocs.org>`_ で一般公開することもできます．
+
+Webサーバをお持ちであれば，Sphinxで作成したHTMLファイルを所定のディレクトリにアップロードすることで表示することも可能です．
+
+さらに，PDF形式にも出力できます．
