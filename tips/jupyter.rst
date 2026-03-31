@@ -6,7 +6,7 @@ Jupyter Notebookを用いた実験データの分析と可視化
 ここでは，Jupyter Notebookを活用して実験ログから分析を行い，図や表として出力するまでの一連のワークフローを解説します．
 
 環境構築
-=====================
+*******************
 
 まずは，Pythonがインストールされていることを確認してください．
 
@@ -26,7 +26,7 @@ Jupyter Notebookの環境は，VSCodeの拡張機能が便利です．
 
 
 分析方法の例
-======================
+*******************
 
 冒頭で関連ライブラリをインポートします．
 また，プロジェクト全体で用いる定数を集約しておきます．
@@ -38,12 +38,12 @@ Jupyter Notebookの環境は，VSCodeの拡張機能が便利です．
    import matplotlib as mpl
    from pathlib import Path
 
-   # グラフのスタイル一括設定：論文や報告書向けのフォント設定
+   # グラフのスタイルを設定 (フォントの埋め込み)
    mpl.rcParams["font.family"] = ["DejaVu Sans", "IPAexGothic"]
-   mpl.rcParams['pdf.fonttype'] = 42 # PDF出力時のフォント埋め込み
+   mpl.rcParams['pdf.fonttype'] = 42
 
+   # 定義の例
    BASE_DIR = Path("ipc-bench")
-   # 分析対象を辞書形式で定義し，コード内での可読性と保守性を両立させる
    TECH_LABEL = {"fifo": "名前付きパイプ", "tcp": "TCPソケット"}
 
 .. note::
@@ -92,7 +92,7 @@ Pandasを活用してデータを構造化します．
 
 
 グラフの描画
-=========================
+*******************
 
 Matplotlibを用いて，分析結果をグラフ化します．
 Jupyter Notebook上では図をインラインで確認できるため，エラーバーの付与や，データが存在しない箇所への「N/A」注釈など，細かい表現の作り込みを対話的に行います．

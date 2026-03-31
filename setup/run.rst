@@ -11,7 +11,7 @@ QEMUを用いた実行方法
 
 .. code-block:: bash
 
-    [container ~]# <test command>
+    $ <test command>
 
 
 Armadillo-X2を用いた実行方法
@@ -33,10 +33,10 @@ tee-supplicantが起動していない場合は，以下のコマンドで起動
 
 .. code-block:: bash
 
-    ./run.sh
+    $ ./run.sh
 
 .. hint::
 
     実験データを取得する場合には，ソースコードで適切な出力処理を行い， ``tee`` コマンドを用いてパイプラインから出力を保存することができます．
     
-    保存したデータの分析方法を :ref:`jupyter` に記載しています．
+    保存したデータの分析方法については， :ref:`jupyter` に記載しています．

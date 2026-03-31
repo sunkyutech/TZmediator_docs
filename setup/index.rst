@@ -12,4 +12,3 @@
    deploy
    run
    armadillo
-   debug

@@ -39,8 +39,8 @@ TZm-TAライブラリへの追加
 
 .. code-block:: bash
 
-    cd linux-trustzone
-    ./build_lib.sh
+    $ cd linux-trustzone
+    $ ./build_lib.sh
 
 
 TZm-CAライブラリへの追加
